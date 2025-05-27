@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo de Eventos</title>
+    <link rel="stylesheet" href="public/css/estilos.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+<body>
+    <div class="col-xl-4 letra-1">
+        <img src="public/img/usar.jpg" alt="L-usar Risaralda" width="70%" height="auto" class="image">
+        <p class="title">L-USAR RISARALDA</p>
+    </div>
+    <div class="container col-xl-8">
+        <h1>Línea de Tiempo de Operaciones</h1>
+        <form id="eventForm">
+            <label for="timelineName">Nombre de la línea de tiempo:</label>
+            <input type="text" id="timelineName" placeholder="Nombre de la línea de tiempo" required><br>
+
+            <label for="eventInput">Añadir evento:</label>
+            <textarea id="eventInput" placeholder="Añadir evento..." ></textarea><br>
+            <div class="file-container2">
+                <label for="eventTime">Hora del evento:</label>
+                <input type="time" id="eventTime" required><br>
+
+                <label for="eventDate">Fecha del evento:</label>
+                <input type="date" id="eventDate" required><br>
+            </div>
+            <div class="file-container">
+                <div>
+                  <label for="eventImage">Imagen del evento:</label>
+                  <input type="file" id="eventImage" accept="image/*">
+                </div>
+          
+                <div>
+                  <label for="eventFile">Archivo del evento:</label>
+                  <input type="file" id="eventFile">
+                </div>
+              </div>
+            <button class="submit" type="submit">Añadir Evento</button>
+        </form>
+        <h2 id="timelineTitle"></h2>
+        <ul id="eventList"></ul>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Editar evento:</p>
+                <input type="text" id="editEventText" value="">
+                <input type="time" id="editEventTime" value="">
+                <button id="saveEdit">Guardar</button>
+            </div>
+        </div>
+        <button id="clearAllButton">Borrar Todos los Eventos</button>
+        <button id="exportPDFButton">Exportar como PDF</button>
+        <button id="exportExcelButton">Exportar como Excel</button>
+        <input type="file" id="importExcelButton" accept=".xlsx" style="display:none;">
+        <label for="importExcelButton">Importar desde Excel</label>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="public/js/script.js"></script>
+</body>
+</html>
