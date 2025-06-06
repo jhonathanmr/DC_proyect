@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     locationButton.addEventListener('click', getLocation);
     eventForm.appendChild(locationButton);
 
+    const maxWidth = 120;
     // Cargar eventos desde localStorage
     const loadEvents = () => {
         const timelineData = JSON.parse(localStorage.getItem('timelineData')) || { name: '', events: [] };
@@ -254,10 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
     exportPDFButton.addEventListener('click', () => {
         const { jsPDF } = window.jspdf; // Obtener jsPDF desde el objeto global
         const doc = new jsPDF('p', 'mm', 'a4'); // Crear un nuevo documento PDF
-        const margin = 15; // Márgenes de la página
-        const lineHeight = 7; // Altura de cada línea de texto
+        const margin = 20; // Márgenes de la página
+        const lineHeight = 6; // Altura de cada línea de texto
         const timelineStartX = margin + 10; // Posición horizontal de la línea de tiempo
-        let y = margin + 20; // Posición vertical inicial
+        let y = margin + 10; // Posición vertical inicial
 
         // Función para dividir el texto en varias líneas
         const splitText = (text, maxWidth) => {
@@ -302,8 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.circle(timelineStartX, y, 2, 'F'); // Punto en la línea de tiempo
 
             // Añadir el texto del evento al lado de la línea de tiempo
-            const eventX = timelineStartX + 10; // Posición horizontal del texto
-            const maxWidth = doc.internal.pageSize.width - eventX - margin + 80;
+            const eventX = timelineStartX + 8; // Posición horizontal del texto
+            
 
             // Dividir el texto del evento en varias líneas
             const eventLines = splitText(text, maxWidth);
@@ -314,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             eventLines.forEach((line, index) => {
                 doc.text(line, eventX, y + index * lineHeight);
             });
+            //console.log(line)//
 
             // Añadir fecha, hora y tiempo transcurrido
             doc.setFontSize(10);
@@ -351,16 +353,18 @@ document.addEventListener('DOMContentLoaded', () => {
             y += lineHeight * 2;
 
             // Verificar si se necesita una nueva página
-            if (y > doc.internal.pageSize.height - margin) {
+            if (y > doc.internal.pageSize.height - margin -40) {
                 doc.addPage();
-                y = margin + 20; // Reiniciar la posición vertical
+                y = margin + 10; // Reiniciar la posición vertical
                 // Dibujar la línea de tiempo en la nueva página
                 doc.line(timelineStartX, y, timelineStartX, doc.internal.pageSize.height - margin);
+                //console.log(margin,"margin",doc.internal.pageSize.height,"tamaño",y)
             }
         });
 
         // Guardar el PDF
         doc.save('linea_de_tiempo.pdf');
+        
     });
 
 
