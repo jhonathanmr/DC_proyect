@@ -424,4 +424,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cargar eventos al iniciar
     loadEvents();
+    
 });
