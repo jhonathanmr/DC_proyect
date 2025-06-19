@@ -259,7 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const lineHeight = 6; // Altura de cada línea de texto
         const timelineStartX = margin + 10; // Posición horizontal de la línea de tiempo
         let y = margin + 10; // Posición vertical inicial
+        const headerImage = 'encabezado.jpg'; // Ruta de la imagen
+        const pageWidth = doc.internal.pageSize.width; // Ancho de la página
+        const imageWidth = pageWidth - 2 * margin; // Ancho de la imagen con márgenes
+        const imageHeight = 50; // Altura de la imagen en el encabezado
 
+        // Agregar la imagen en la parte superior
+        doc.addImage(headerImage, 'JPEG', margin, margin, imageWidth, imageHeight);
         // Función para dividir el texto en varias líneas
         const splitText = (text, maxWidth) => {
             const words = text.split(' ');
@@ -280,10 +286,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return lines;
         };
 
-        // Añadir el título de la línea de tiempo
-        doc.setFontSize(18);
-        doc.text('Línea de Tiempo de Operaciones', margin, y);
-        y += lineHeight * 2;
+        // Función para centrar el texto
+        function centerText(text, yPosition) {
+            const textWidth = doc.getTextWidth(text); // Obtener el ancho del texto
+            const xPosition = (pageWidth - textWidth) / 2; // Calcular la posición X para centrar
+            doc.text(text, xPosition, yPosition); // Imprimir el texto centrado
+            return yPosition + lineHeight * 1.5; // Devolver la nueva posición Y para el siguiente texto
+        }
+
+        // Imprimir el texto centrado
+        y = centerText('BUSQUEDA Y RESCATE URBANO', y);
+        y = centerText('DEFENSA CIVIL COLOMBIANA', y);
+        y = centerText('SECCIONAL RISARALDA', y);
+        y = centerText('Línea de Tiempo de Operaciones', y);
 
         // Dibujar la línea de tiempo
         const timelineEndY = doc.internal.pageSize.height - margin;
