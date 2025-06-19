@@ -331,23 +331,56 @@ document.addEventListener('DOMContentLoaded', () => {
             const image = li.querySelector('.event-image');
             if (image) {
                 const imgData = image.src;
-                doc.addImage(imgData, 'JPEG', eventX, y, 30, 30); // Ajustar tamaño de la imagen
-                y += 40; // Ajustar la posición vertical después de la imagen
+                doc.addImage(imgData, 'JPEG', eventX, y, 30, 30); // Mostrar imagen
+                y += 35; // Espacio debajo de la imagen
+
+                // Mostrar la ruta de la imagen
+                doc.setFontSize(9);
+                doc.setTextColor(150); // Gris claro
+                const imgPathLines = splitText(`Ruta imagen: ${imgData}`, 150);
+                imgPathLines.forEach(line => {
+                    doc.text(line, eventX, y);
+                    y += lineHeight;
+                });
             }
 
-            // Añadir el archivo adjunto (si existe)
+
+          // Añadir el archivo adjunto (si existe)
             const fileLink = li.querySelector('.attachment-link');
             if (fileLink) {
-                doc.text(`Archivo adjunto: ${fileLink.textContent}`, eventX, y);
+                const fileHref = fileLink.href;
+                const linkText = `Archivo adjunto: ${fileHref}`;
+
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 255); // Azul
+                doc.textWithLink(linkText, eventX, y, { url: fileHref });
                 y += lineHeight;
             }
+
 
             // Añadir la ubicación (si existe)
             const locationLink = li.querySelector('a[href*="maps"]');
             if (locationLink) {
-                doc.text(`Ubicación: ${locationLink.textContent}`, eventX, y);
-                y += lineHeight;
+                const locationHref = locationLink.href;
+
+                // Extraer coordenadas de la URL
+                const match = locationHref.match(/q=([-.\d]+),([-.\d]+)/);
+                if (match) {
+                    const lat = match[1];
+                    const lon = match[2];
+
+                    doc.setFontSize(10);
+                    doc.setTextColor(0, 0, 0); // Negro
+                    doc.text(`Coordenadas: ${lat}, ${lon}`, eventX, y);
+                    y += lineHeight;
+
+                    // Enlace clickeable a Google Maps
+                    doc.setTextColor(0, 0, 255); // Azul
+                    doc.textWithLink('Ver en Google Maps', eventX, y, { url: locationHref });
+                    y += lineHeight;
+                }
             }
+
 
             // Añadir espacio entre eventos
             y += lineHeight * 2;

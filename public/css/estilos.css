@@ -342,4 +342,74 @@ li button:hover {
     padding-right: 10px;
   }
 
-  
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    /* Ocultar la columna de imagen en pantallas pequeñas */
+    .col-xl-4 {
+        display: none; /* Ocultar columna izquierda */
+    }
+
+    /* Aseguramos que la columna de contenido ocupe todo el ancho */
+    .col-xl-8 {
+        width: 100% !important; /* Forzamos que las columnas ocupen el 100% del ancho */
+        display: block; /* Aseguramos que se muestren como bloques */
+        margin: 0 auto; /* Centramos el contenido */
+    }
+
+    /* Hacemos que el contenedor tenga un padding más pequeño */
+    .container {
+        padding: 10px;
+    }
+
+    /* Aseguramos que las imágenes ocupen todo el ancho disponible */
+    .image {
+        width: 100% !important;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    /* Hacemos que los formularios se apilen correctamente */
+    .file-container, .file-container2 {
+        display: block;
+        width: 100%;
+    }
+
+    /* Botones centrados y en bloque */
+    button.submit {
+        width: auto;
+        margin: 10px auto;
+        display: block;
+    }
+
+    /* Títulos más pequeños */
+    h1, h2 {
+        font-size: 1.8em;
+        text-align: center;
+    }
+
+    /* Modal más pequeño */
+    .modal-content {
+        width: 90%;
+    }
+
+    /* Ajustar el contenido del evento para que los botones vayan debajo */
+    li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Mover los botones de editar y eliminar debajo del evento */
+    .event-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Espacio entre los botones */
+        margin-top: 10px; /* Separación entre el contenido del evento y los botones */
+    }
+
+    li button {
+        width: 100%; /* Asegurar que los botones ocupen el 100% del ancho disponible */
+        margin-top: 10px; /* Margen superior para separarlos */
+        display: block; /* Los botones se muestran uno debajo del otro */
+    }
+}
