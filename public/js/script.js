@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
             y += lineHeight * 2;
 
             // Verificar si se necesita una nueva página
-            if (y > doc.internal.pageSize.height - margin -40) {
+            if (y > doc.internal.pageSize.height - margin -80) {
                 doc.addPage();
                 y = margin + 10; // Reiniciar la posición vertical
                 // Dibujar la línea de tiempo en la nueva página
